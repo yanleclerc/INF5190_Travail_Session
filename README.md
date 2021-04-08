@@ -10,7 +10,7 @@
 
 ## Guide de l'utilisateur
 La documentation pour faire fonctionner correctement le mini-programme.
-Il est disponible à cette adresse: (correction.md)[https://github.com/yanleclerc/INF5190_Travail_Session/blob/main/correction.md]
+Il est disponible à cette adresse: [correction.md](https://github.com/yanleclerc/INF5190_Travail_Session/blob/main/correction.md)
 
 ## Liste des Plugins utilisés
 
