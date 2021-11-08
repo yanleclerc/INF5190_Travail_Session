@@ -1,0 +1,98 @@
+<!-- @Auteur : Yan-Alexandre Leclerc @CP : LECY20069604  -->
+
+{% extends "default.html" %}
+{% block content %}
+
+    <main class="form-signin">
+        <img src="{{ url_for('static', filename='bug.png') }}" alt="bug_image">
+        <form action="/api/requete" class="form-control" id="formElem"
+              method="post" onsubmit="return validerRequete()">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputNomQr" class="col-form-label">Quartier</label>
+                </div>
+                <div class="col offset-1">
+                    <input type="text" id="inputNomQr" class="form-control"
+                    >
+                </div>
+                <span class="alert-danger" id="invalidNomQr">
+                    </span>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputNomArrond" class="col-form-label">Arrondissement</label>
+                </div>
+                <div class="col">
+                    <input type="text" id="inputNomArrond" class="form-control"
+                    >
+                </div>
+                <span class="alert-danger" id="invalidNomArrond">
+                    </span>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputAdresse" class="col-form-label">Adresse complète</label>
+                </div>
+                <div class="col">
+                    <input type="text" id="inputAdresse" class="form-control"
+                    >
+                </div>
+                <span class="alert-danger" id="invalidAdresse">
+                    </span>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputDateVisite" class="col-form-label">Date de visite</label>
+                </div>
+                <div class="col offset-1">
+                    <input type="text" id="inputDateVisite" class="form-control"
+                           aria-describedby="datedHelpInline">
+                </div>
+                <div class="col-auto">
+                <span id="dateHelpInline" class="form-text">
+                    JJ-MM-AAAA.
+                </span>
+                </div>
+                <span class="alert-danger" id="invalidDateVisite">
+                    </span>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputNomResident" class="col-form-label">Nom et Prénom</label>
+                </div>
+                <div class="col">
+                    <input type="text" id="inputNomResident" class="form-control"
+                    >
+                </div>
+                <span class="alert-danger" id="invalidNomResident">
+                    </span>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <label for="inputDescription" class="col-form-label">Description</label>
+                </div>
+                <div class="col offset-1">
+                    <input type="text" id="inputDescription" class="form-control"
+                    >
+                </div>
+                <span class="alert-danger" id="invalidDescription">
+                    </span>
+            </div>
+
+            <button class="btn btn-alert" type="reset">Effacer</button>
+            <button type="submit" class="btn btn-dark">Soumettre</button>
+        </form>
+
+        <div class="row">
+            <div class="col">
+                <a class="" href="/">Retour</a>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

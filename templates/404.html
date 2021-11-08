@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- @Auteur : Yan-Alexandre Leclerc @CP : LECY20069604  -->
 
-</body>
-</html>
+{% extends "default.html" %}
+{% block content %}
+
+<main class="form-signin">
+    <div>
+        <p class="display-1">Oh non!</p>
+        <p>Il semblerait que vous aillez perdu votre chemin.
+            <a href="/">Veuillez ramener baby Yoda à bon port.</a>
+        </p>
+        <img class="img-fluid" src="{{ url_for('static', filename='baby-yoda.png') }}" alt="" >
+    </div>
+</main>
+
+{% endblock %}

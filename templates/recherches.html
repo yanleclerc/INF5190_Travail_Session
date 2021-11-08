@@ -1,0 +1,48 @@
+{% extends "default.html" %}
+{% block content %}
+    <main>
+        <img src="{{ url_for('static', filename='bug.png') }}" alt="bug_image">
+            <div >
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Num_Déclaration</th>
+                        <th scope="col">Date_Déclaration</th>
+                        <th scope="col">Date_Insp_Vispre</th>
+                        <th scope="col">Nbr_Extermin</th>
+                        <th scope="col">Date_Debuttrait</th>
+                        <th scope="col">Date_Fintrait</th>
+                        <th scope="col">N_Qr</th>
+                        <th scope="col">Nom_Qr</th>
+                        <th scope="col">Nom_Arrond</th>
+                        <th scope="col">Coord_X</th>
+                        <th scope="col">Coord_Y</th>
+                        <th scope="col">longitude</th>
+                        <th scope="col">Latitude</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    {% for tache in taches %}
+                        <tr>
+                            <td>{{ tache.num_declaration }}</td>
+                            <td>{{ tache.date_declaration }}</td>
+                            <td>{{ tache.date_insp_vispre }}</td>
+                            <td>{{ tache.nbr_extermin }}</td>
+                            <td>{{ tache.date_debuttrait }}</td>
+                            <td>{{ tache.date_fintrait }}</td>
+                            <td>{{ tache.n_qr }}</td>
+                            <td>{{ tache.nom_qr }}</td>
+                            <td>{{ tache.nom_arrond }}</td>
+                            <td>{{ tache.coord_x }}</td>
+                            <td>{{ tache.coord_y }}</td>
+                            <td>{{ tache.longitude }}</td>
+                            <td>{{ tache.latitude }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+    </main>
+
+{% endblock %}

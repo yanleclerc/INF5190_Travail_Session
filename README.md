@@ -14,9 +14,10 @@ Il est disponible à cette adresse: [correction.md](https://github.com/yanlecler
 
 ## Liste des Plugins utilisés
 
-### SQLAlchemy
-
+Voir fichier [correction.md](https://github.com/yanleclerc/INF5190_Travail_Session/blob/main/correction.md)
 
 ## Fichiers/Répertoires
 
+
 ## Références
+

@@ -1,10 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- @Auteur : Yan-Alexandre Leclerc @CP : LECY20069604  -->
 
-</body>
-</html>
+{% extends "default.html" %}
+{% block content %}
+
+    <main class="form-signin">
+        <img src="{{ url_for('static', filename='bug.png') }}" alt="bug_image">
+
+        <div class="container">
+            <div class="row">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Recherche par Quartiers/Arrondissements
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form action="/" method="post" name="form_nomQA" onsubmit='return validerNomQA()'>
+                                    <div class="form-group">
+                                        <label for="nom_QA" class="invisible">Saisie</label>
+                                        <input type="text" id="nom_QA" name="nom_QA" class="form-control"
+                                               placeholder="Nom de quartier/arrondissement" autofocus=""
+                                               aria-describedby="nom_QA_aide">
+                                        <span class="alert-danger" id="invalid_nom_QA">
+                 </span>
+                                        {% if error %}
+                                            <div class="alert alert-danger" role="alert" id="erreur_nom_QA">
+                                                {{ error }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <button class="w-100 btn btn-lg btn-success" type="submit">
+                                        Rechercher
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Recherche par Dates
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-group">
+                                    <label for="date_debut" class="invisible">Saisie</label>
+                                    <input type="text" id="date_debut" name="date_debut" class="form-control"
+                                           placeholder="Date début traitement" autofocus=""
+                                           aria-describedby="date_debut_aide">
+                                    <span class="alert-danger" id="invalid_date_debut">
+                 </span>
+                                    <label for="date_fin" class="invisible">Date_Fin</label>
+                                    <input type="text" id="date_fin" name="date_fin" class="form-control"
+                                           placeholder="Date fin traitement" autofocus=""
+                                           aria-describedby="date_fin_aide">
+                                    <span class="alert-danger" id="invalid_date_fin">
+                 </span>
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert" id="erreur_dates">
+                                            {{ error }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <button class="w-100 btn btn-lg btn-success" type="button"
+                                        onclick="return validerDates()">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p>Faire une nouvelle requête?
+                        <a class="" href="/api/requete">Cliquez ici!</a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p class="mt-5 mb-3 text-muted">Yan-Alexandre Leclerc <br>
+                LECY20069604
+            </p>
+        </footer>
+    </main>
+
+{% endblock %}

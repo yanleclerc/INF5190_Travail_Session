@@ -11,17 +11,17 @@
    limitations under the License.
 """
 
-#A3
-#BackgroundScheduler pour telecharger les données de la ville chaque jour à minuit
-#Ce bout de code peut etre deplacé à votre guise, faire attention aux imports circulaires
+# A3 BackgroundScheduler pour telecharger les données de la ville chaque
+# jour à minuit Ce bout de code peut etre deplacé à votre guise,
+# faire attention aux imports circulaires
 
-#pip3 install appscheduler
+# pip3 install appscheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
 import manage
 
-#set scheduler
+# set scheduler
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(manage.data_handler(),'cron',hour=0)
+sched.add_job(manage.data_handler(), 'cron', hour=0)
 sched.start()
 atexit.register(lambda: sched.shutdown())

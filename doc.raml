@@ -1,0 +1,306 @@
+#%RAML 1.0
+title: REST API for Travail Session
+mediaType: application/json
+types:
+  NewDeclaration:
+    properties:
+      num_declaration:
+        type: string
+        required: true
+      date_declaration:
+        type: string
+        required: true
+      date_insp_vispre:
+        type: string
+        required: true
+      nbr_extermin:
+        type: integer
+        required: false
+      date_debuttrait:
+        type: string
+        required: false
+      date_fintrait:
+        type: string
+        required: false
+      n_qr:
+        type: string
+        required: true
+      nom_qr:
+        type: string
+        required: true
+      nom_arrond:
+        type: string
+        required: true
+      coord_x:
+        type: string
+        required: true
+       coord_y:
+        type: string
+        required: true
+      longitude:
+        type: string
+        required: true
+      latitude:
+        type: string
+        required: true
+  ExistingDeclaration:
+    properties:
+      id:
+        type: integer
+        required: true
+      num_declaration:
+        type: string
+        required: true
+      date_declaration:
+        type: string
+        required: true
+      date_insp_vispre:
+        type: string
+        required: true
+      nbr_extermin:
+        type: integer
+        required: false
+      date_debuttrait:
+        type: string
+        required: false
+      date_fintrait:
+        type: string
+        required: false
+      n_qr:
+        type: string
+        required: true
+      nom_qr:
+        type: string
+        required: true
+      nom_arrond:
+        type: string
+        required: true
+      coord_x:
+        type: string
+        required: true
+       coord_y:
+        type: string
+        required: true
+      longitude:
+        type: string
+        required: true
+      latitude:
+        type: string
+        required: true
+  Zonelist:
+    properties:
+      nom_qr:
+        type: string
+        required: true
+      compteur:
+        type: integer
+        required: true
+  NewUser:
+    properties:
+      nom:
+        type: string
+        required: true
+      courriel:
+        type: string
+        required: true
+      liste_qr:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+  ExistingUser:
+    properties:
+      id:
+        type: integer
+        required: true
+      nom:
+        type: string
+        required: true
+      courriel:
+        type: string
+        required: true
+      liste_qr:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+  NewRequest:
+    properties:
+      nom_qr:
+        type: string
+        required: true
+      nom_arrond:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      date_visite:
+        type: string
+        required: true
+      nom_complet:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+  ExistingRequest:
+    properties:
+      id:
+        type: integer
+        required: true
+      nom_qr:
+        type: string
+        required: true
+      nom_arrond:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      date_visite:
+        type: string
+        required: true
+      nom_complet:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+/api:
+  /declaration:
+    /du={date_debuttrait}&au={date_fintrait}:
+      get:
+        description: Extract the data of matching declarations, specified by their start and end dates.
+        responses:
+          200:
+            body:
+              application/json:
+                type: ExistingDeclaration
+                example:
+                  id: 2
+                  num_declaration: 4254
+                  date_declaration: 2012-10-28T16:36:04
+                  date_insp_vispre: 2012-09-21
+                  nbr_extermin: 1
+                  date_debuttrait: 2012-09-21
+                  date_fintrait: 2012-09-21
+                  n_qr: "24"
+                  nom_qr: "Beaurivage"
+                  nom_arrond: "Mercier–Hochelaga-Maisonneuve"
+                  coord_x: 303753.6
+                  coord_y: 5049835.7
+                  longitude: -73.513411
+                  latitude: 45.588426
+          404:
+            description: The specified dates does not exist for any declaration.
+  /quartiers:
+    /json:
+      get:
+        description: Extract in JSON the number of declarations for each zones.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Zonelist
+                example:
+                  nom_qr: Beaurivage
+                  compteur: 39
+          404:
+            description: Unable to extract list of zones.
+    /xml:
+      get:
+        description: Extract in XML the number of declarations for each zones.
+        responses:
+          200:
+            body:
+              application/xml:
+                  type: Zonelist
+                  example: |
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <ZoneList>
+                      <item>
+                        <nom_qr>Beaurivage</nom_qr>
+                        <compteur>39</compteur>
+                      </item>
+                    <ZoneList>
+          404:
+            description: Unable to extract list of zones.
+    /csv:
+      get:
+          description: Extract in CSV the number of declarations for each zones.
+          responses:
+            200:
+              body:
+                application/csv:
+                    type: Zonelist
+                    example: |
+                     ,nom_qr,compteur
+                              0,"""Sainte-Marie""",2076
+                              1,"""Maisonneuve""",1385
+                              2,"""Crémazie""",1361
+                              3,"""Parc-Extension""",1359
+                              4,"""Vieux-Rosemont""",1094
+                              5,"""Lorimier""",1031
+            404:
+              description: Unable to extract list of zones.
+  /inscription:
+    post:
+      description: Create a new user.
+      body:
+        application/json:
+          type: NewUser
+          example:
+            nom: Yan-Alexandre Leclerc
+            courriel: yan12334@gmail.com
+            liste_qr: Beaurivage
+            password: Yleclerc11!
+      responses:
+        201:
+          description: The user was successfully created.
+          body:
+            application/json:
+              type: ExistingUser
+              example:
+                id: 2
+                nom: Yan-Alexandre Leclerc
+                courriel: yan12334@gmail.com
+                liste_qr: Beaurivage
+                password: Yleclerc11!
+  /requete:
+    post:
+      description: Create a new request.
+      body:
+        application/json:
+          type: NewRequest
+          example:
+            nom_qr: Beaurivage
+            nom_arrond: Mercier–Hochelaga-Maisonneuve
+            adresse: 31 Jacques-Cartier,J7J0M1,Montreal,QC
+            date_visite: 2012-09-21
+            nom_complet: Yan-Alexandre Leclerc
+            description: Invasion de punaises dans la niche du chien.
+      responses:
+        201:
+          description: The request was successfully created.
+          body:
+            application/json:
+              type: ExistingRequest
+              example:
+                id: 1
+                nom_qr: Beaurivage
+                nom_arrond: Mercier–Hochelaga-Maisonneuve
+                adresse: 31 Jacques-Cartier,J7J0M1,Montreal,QC
+                date_visite: 2012-09-21
+                nom_complet: Yan-Alexandre Leclerc
+                description: Invasion de punaises dans la niche du chien.
+    /{id}:
+      delete:
+        description: Delete completely the data of a request, specified by it's id.
+        responses:
+          200:
+            description: The request was deleted successfully.
+          404:
+            description: The specified identifier does not exist.
